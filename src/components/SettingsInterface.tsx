@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
-import { Play, AlertTriangle, ExternalLink, Star, Tv, Users } from "lucide-react";
+import { Play, Search, Star, Tv, Users } from "lucide-react";
 import { channels } from "@/data/channels";
 import { VideoPlayer } from "@/components/VideoPlayer";
 
@@ -14,7 +13,7 @@ interface SettingsInterfaceProps {
 }
 
 export const SettingsInterface = ({ onChannelSelect }: SettingsInterfaceProps) => {
-  const [selectedLanguage, setSelectedLanguage] = useState("tl");
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedChannelId, setSelectedChannelId] = useState<string | null>(null);
 
   const selectedChannel = channels.find(channel => channel.id === selectedChannelId);
@@ -26,17 +25,10 @@ export const SettingsInterface = ({ onChannelSelect }: SettingsInterfaceProps) =
     }
   };
 
-  const languages = [
-    { value: "tl", label: "TL | Tagalog" },
-    { value: "en", label: "EN | English" },
-    { value: "es", label: "ES | Español" },
-    { value: "fr", label: "FR | Français" },
-    { value: "zh", label: "ZH | 中国人" },
-  ];
-
-  const handleQuickPlay = (channelId: string) => {
-    onChannelSelect(channelId);
-  };
+  const filteredChannels = channels.filter(channel => 
+    channel.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    channel.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen bg-background p-6">
@@ -57,40 +49,21 @@ export const SettingsInterface = ({ onChannelSelect }: SettingsInterfaceProps) =
         </div>
 
         <div className="bg-card rounded-lg border border-border p-6 space-y-6">
-          {/* CORS Warning */}
-          <Alert className="border-yellow-500/50 bg-yellow-500/10">
-            <AlertTriangle className="h-4 w-4 text-yellow-500" />
-            <AlertDescription className="text-sm">
-              Some channels might not play due to strict CORS policy.{" "}
-              <a 
-                href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline inline-flex items-center gap-1"
-              >
-                More info and how to fix this
-                <ExternalLink className="w-3 h-3" />
-              </a>
-            </AlertDescription>
-          </Alert>
-
-          {/* Language Selection */}
+          {/* Search Box */}
           <div className="space-y-3">
             <label className="text-sm font-medium text-foreground">
-              Language
+              Search Channels
             </label>
-            <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
-              <SelectTrigger className="w-full">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {languages.map((lang) => (
-                  <SelectItem key={lang.value} value={lang.value}>
-                    {lang.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search for channels..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10"
+              />
+            </div>
           </div>
 
           <Separator />
@@ -100,7 +73,7 @@ export const SettingsInterface = ({ onChannelSelect }: SettingsInterfaceProps) =
             <h3 className="text-xl font-semibold gradient-text">Available Filipino Channels</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {channels.map((channel) => (
+              {filteredChannels.map((channel) => (
                 <Card key={channel.id} className="group hover:shadow-lg transition-all duration-300 bg-card/50 backdrop-blur-sm border-border/50">
                   <CardContent className="p-4 space-y-3">
                     <div className="flex items-center justify-between">
@@ -141,7 +114,7 @@ export const SettingsInterface = ({ onChannelSelect }: SettingsInterfaceProps) =
             
             <div className="text-center">
               <p className="text-sm text-muted-foreground">
-                {channels.length} total channels available
+                {filteredChannels.length} of {channels.length} channels {searchQuery ? `matching "${searchQuery}"` : 'available'}
               </p>
             </div>
           </div>
