@@ -3,10 +3,8 @@ export interface Channel {
   name: string;
   category: string;
   thumbnail: string;
-  description: string;
   streamUrl: string;
   isLive: boolean;
-  viewers: number;
 }
 
 export const channels: Channel[] = [
@@ -17,7 +15,6 @@ export const channels: Channel[] = [
     thumbnail: "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=400&h=300&fit=crop&crop=center",
     streamUrl: "https://abslive.akamaized.net/dash/live/2028025/jeepneytv/manifest.mpd",
     isLive: true,
-    viewers: 15420
   },
   {
     id: "a2z",
