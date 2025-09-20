@@ -15,7 +15,6 @@ export const channels: Channel[] = [
     name: "Jeepney TV",
     category: "entertainment",
     thumbnail: "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=400&h=300&fit=crop&crop=center",
-    description: "The best in Filipino entertainment, comedy shows, at mga klasikong pelikula.",
     streamUrl: "https://abslive.akamaized.net/dash/live/2028025/jeepneytv/manifest.mpd",
     isLive: true,
     viewers: 15420
