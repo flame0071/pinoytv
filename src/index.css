@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* M3U IPTV Inspired Minimalist Design */
+    --background: 220 27% 8%;
+    --foreground: 210 11% 85%;
+
+    --card: 220 27% 12%;
+    --card-foreground: 210 11% 85%;
+
+    --popover: 220 27% 12%;
+    --popover-foreground: 210 11% 85%;
+
+    /* M3U IPTV inspired teal accent */
+    --primary: 184 83% 53%;  /* Modern teal */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 184 83% 65%;
+
+    --secondary: 220 27% 15%;
+    --secondary-foreground: 210 11% 85%;
+
+    --muted: 220 27% 10%;
+    --muted-foreground: 210 6% 50%;
+
+    /* Tropical accent - vibrant teal */
+    --accent: 178 76% 58%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 220 27% 18%;
+    --input: 220 27% 15%;
+    --ring: 184 83% 53%;
+
+    --radius: 1rem;
+
+    /* M3U IPTV Inspired Design */
+    --iptv-gradient: linear-gradient(135deg, hsl(184 83% 53%), hsl(210 100% 70%));
+    --iptv-gradient-subtle: linear-gradient(135deg, hsl(184 83% 53% / 0.1), hsl(210 100% 70% / 0.1));
+    --iptv-hero-bg: linear-gradient(135deg, hsl(220 27% 8%) 0%, hsl(220 27% 5%) 100%);
+    --iptv-card-hover: 220 27% 18%;
+    --iptv-glow: 0 0 40px hsl(184 83% 53% / 0.4);
+    --iptv-glow-accent: 0 0 30px hsl(184 83% 53% / 0.3);
+    --iptv-channel-active: 184 83% 53%;
+    
+    /* Enhanced Video Player Colors */
+    --player-bg: 0 0% 0%;
+    --player-controls: 220 27% 10%;
+    --player-progress: 184 83% 53%;
+
+    /* Enhanced Sidebar */
+    --sidebar-background: 220 15% 8%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 12 88% 59%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 15% 12%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 220 15% 18%;
+    --sidebar-ring: 12 88% 59%;
+
+    /* Additional Design Tokens */
+    --gradient-warm: linear-gradient(135deg, hsl(184 83% 53%), hsl(210 100% 70%));
+    --gradient-cool: linear-gradient(135deg, hsl(184 83% 53%), hsl(220 90% 60%));
+    --gradient-hero: linear-gradient(135deg, hsl(184 83% 53% / 0.8), hsl(210 100% 70% / 0.6));
+    --shadow-elegant: 0 25px 50px -12px hsl(184 83% 53% / 0.25);
+    --shadow-card: 0 10px 25px -5px hsl(0 0% 0% / 0.5);
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .dark {
+    /* Enhanced dark theme with Filipino sunset vibes */
+    --background: 222 20% 4%;
+    --foreground: 210 20% 98%;
+    --card: 220 15% 8%;
+    --card-foreground: 210 20% 95%;
+    --popover: 220 15% 8%;
+    --popover-foreground: 210 20% 95%;
+    --primary: 12 88% 59%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 15% 12%;
+    --secondary-foreground: 210 20% 95%;
+    --muted: 220 15% 10%;
+    --muted-foreground: 210 10% 65%;
+    --accent: 178 76% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 15% 18%;
+    --input: 220 15% 12%;
+    --ring: 12 88% 59%;
+    --sidebar-background: 220 15% 8%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 12 88% 59%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 15% 12%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 220 15% 18%;
+    --sidebar-ring: 12 88% 59%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary-glow));
+  }
+}
+
+@layer components {
+  /* Enhanced UI Components */
+  .gradient-text {
+    @apply bg-iptv-gradient bg-clip-text text-transparent;
+  }
+
+  .card-enhanced {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50 rounded-xl;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+  }
+
+  .card-enhanced:hover {
+    @apply bg-iptv-card-hover border-primary/30;
+    box-shadow: var(--shadow-elegant);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .button-glow {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .button-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .button-glow:hover::before {
+    left: 100%;
+  }
+
+  .live-pulse {
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 10px hsl(var(--destructive));
+    }
+    50% {
+      opacity: 0.8;
+      box-shadow: 0 0 20px hsl(var(--destructive)), 0 0 30px hsl(var(--destructive));
+    }
+  }
+}
