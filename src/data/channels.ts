@@ -65,6 +65,15 @@ export const channels: Channel[] = [
     viewers: 19230
   },
   {
+    id: "Rakuten-viki",
+    name: "Rakuten Viki",
+    category: "entertainment",
+    thumbnail: "https://i.imgur.com/VLlyHhT.png",
+    streamUrl: "https://jmp2.uk/rok-c4bdfe6fd751590e9d096b5de264bba1.m3u8",
+    isLive: true,
+    viewers: 19230
+  },
+  {
     id: "blast-sports",
     name: "Blast Sports",
     category: "sports",
