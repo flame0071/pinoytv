@@ -74,6 +74,15 @@ export const channels: Channel[] = [
     viewers: 19230
   },
   {
+    id: "Ani-One",
+    name: "Ani One",
+    category: "entertainment",
+    thumbnail: "https://i.imgur.com/VLlyHhT.png",
+    streamUrl: "https://amg18481-amg18481c1-amgplt0352.playout.now3.amagi.tv/playlist/amg18481-amg18481c1-amgplt0352/playlist.m3u8",
+    isLive: true,
+    viewers: 19230
+  },
+  {
     id: "blast-sports",
     name: "Blast Sports",
     category: "sports",
